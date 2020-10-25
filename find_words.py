@@ -98,8 +98,9 @@ if __name__ == "__main__":
 #english 141
 # " around the world" 121  - guess "ilt a system that has as its goal to"
 # "m that has" 110 - guess " for people around the world with"
-
-
+# "conclusion: the U.S. government had"  72 
+# elimination of  155
+# "snowden ar"  26
 
 
 
