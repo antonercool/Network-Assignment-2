@@ -5,7 +5,6 @@ chipher2 = open("challenge2.txt", "rb") # 200 bytes = 200 keys
 # The first 200 keys used in cipher1 and chiper2 are the same
 # In ciphor1 the last 3 keys are not of any used in ciphor1
 
-
 def x_or_chipers():
     content1 = chipher1.read()
     content2 = chipher2.read()
@@ -21,7 +20,6 @@ def guess_word1():
 
     guess_word1 = "for people around the world with"
     guess_word1_as_bytes = guess_word1.encode("ISO-8859-1")
-   
     try_word(guess_word1_as_bytes)
     
 def try_word(guess_word_as_bytes):
@@ -35,12 +33,22 @@ def try_word(guess_word_as_bytes):
         print("slide = " , slide_len , "readable string = " , readable_output_as_string)
 
 
-
-
 def print_list():
-    listSize = 203
-    for i in range(listSize):
-        print(i , " --  C1:  " , "C2:  " )
+    cracked_words = open("cracked.txt", "r")
+    c1chars = []
+    c2chars = []
+    i = 0  
+    for line in cracked_words:
+       c1chars.append(line[13])
+       c2chars.append(line[20])
+       i = i + 1
+    print("Printing line c1")
+    for char in c1chars:
+        print(char, end = '')
+    print("\n")
+    print("printing line c2")
+    for char in c2chars:
+        print(char, end = '')
         
 if __name__ == "__main__":
     #print(x_or_chipers())
