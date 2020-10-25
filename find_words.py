@@ -1,8 +1,9 @@
 import re
+import sys
 # Keys used for the chipers are of size 205
 chipher1 = open("challenge1.txt", "rb") # 203 bytes = 203 keys 
 chipher2 = open("challenge2.txt", "rb") # 200 bytes = 200 keys
-sampleRegex = "^[a-zA-Z0-9_, .-]*$"
+sampleRegex = "^[a-zA-Z0-9_, .-:]*$"
 
 # The first 200 keys used in cipher1 and chiper2 are the same
 # In ciphor1 the last 3 keys are not of any used in ciphor1
@@ -52,8 +53,9 @@ def print_list():
         
 if __name__ == "__main__":
     #print(x_or_chipers())
-    guess_word1(" for people around the world with ")
-    print_list()
+    word = sys.argv[1]
+    guess_word1(word)
+    #print_list()
 
 # next -->  , rule
 
