@@ -3,7 +3,7 @@ import sys
 # Keys used for the chipers are of size 205
 chipher1 = open("challenge1.txt", "rb") # 203 bytes = 203 keys 
 chipher2 = open("challenge2.txt", "rb") # 200 bytes = 200 keys
-sampleRegex = "^[a-zA-Z0-9_, .-:]*$"
+sampleRegex = "^[a-zA-Z0-9_, .-:\"\']*$"
 
 # The first 200 keys used in cipher1 and chiper2 are the same
 # In ciphor1 the last 3 keys are not of any used in ciphor1
