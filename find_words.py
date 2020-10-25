@@ -1,6 +1,8 @@
+import re
 # Keys used for the chipers are of size 205
 chipher1 = open("challenge1.txt", "rb") # 203 bytes = 203 keys 
 chipher2 = open("challenge2.txt", "rb") # 200 bytes = 200 keys
+sampleRegex = "^[a-zA-Z0-9_, .-]*$"
 
 # The first 200 keys used in cipher1 and chiper2 are the same
 # In ciphor1 the last 3 keys are not of any used in ciphor1
@@ -28,7 +30,8 @@ def try_word(guess_word_as_bytes):
         for i in range(len(guess_word_as_bytes)):
             byte_array_readable_output[i] = guess_word_as_bytes[i] ^ byte_array_xor[i+slide_len]       
         readable_output_as_string = byte_array_readable_output.decode("ISO-8859-1")
-        print("slide = " , slide_len , "readable string = " , readable_output_as_string)
+        if re.match(sampleRegex, readable_output_as_string):
+            print("slide = " , slide_len , "readable string = " , readable_output_as_string)        
 
 def print_list():
     cracked_words = open("cracked.txt", "r")
@@ -49,7 +52,7 @@ def print_list():
         
 if __name__ == "__main__":
     #print(x_or_chipers())
-    guess_word1(" or ")
+    guess_word1(" then ")
     print_list()
 
 # next -->  , rule
@@ -87,6 +90,8 @@ if __name__ == "__main__":
 # " is,"        guess  " is "
 
 # "rule"        guess  " on "
+
+# "ficed"       guess " one "
 
 #english 141
 # " around the world" 121  - guess "ilt a system that has as its goal to"
