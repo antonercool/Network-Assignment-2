@@ -52,7 +52,7 @@ def print_list():
         
 if __name__ == "__main__":
     #print(x_or_chipers())
-    guess_word1(" then ")
+    guess_word1(" for people around the world with ")
     print_list()
 
 # next -->  , rule
