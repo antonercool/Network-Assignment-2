@@ -51,87 +51,10 @@ def print_list():
     for char in c2chars:
         print(char, end = '')
         
+
 if __name__ == "__main__":
     #print(x_or_chipers())
-    word = sys.argv[1]
-    guess_word1(word)
-    #print_list()
-
-# next -->  , rule
-
-# Word list
-# Whe  61, As, 128, this 142, " has a" internet 70
-
-# " this"  142  guess " the "
-# "has a"  127  guess " the "
-# "freed"  82   guess " the " 
-# "ence"   22   guess " the "
-
-# " of,"  142   guess " of "
-# " net"  52    guess " of "
-# "rude"  46    guess " of "
-# "oelt"  12    guess " of "
-
-# "them"  61    guess "them"
-
-# "hate" 127    guess " to "    -->  " to a "
-# "end"  22     guess " to "
-
-# " as " 143    guess  " as "
-
-# " in," 142    guess  " in "
-# "icur" 109    guess  " in "
-# "inhi" 106    guess  " in "
-# "eksb" 99     guess  " in "
-# "foc " 82     guess  " in "
-# "eft " 49     guess  " in "
-# "rsle" 46     guess  " in "
-# "ese "  22    guess  " in "
-# "ocdt" 12     guess  " in "
-
-# " is,"        guess  " is "
-
-# "rule"        guess  " on "
-
-# "ficed"       guess " one "
-
-#english 141
-# " around the world" 121  - guess "ilt a system that has as its goal to"
-# "m that has" 110 - guess " for people around the world with"
-# "conclusion: the U.S. government had"  72 
-# elimination of  155
-# "snowden ar"  26
-
-
-
-
-
-
-
-
-
-
-
-
-
-#def string_to_hex(str):
-#    return hex(int(str,base=16))    
-
-#def count_chipher():
-#    content = chipher1.read()
-#    for elem in content:
-#            if elem in chipherDict:
-#                    chipherDict[elem] = chipherDict[elem] + 1
-#            else:
-#                chipherDict[elem] = 1
-#    for item in chipherDict.items():
-#        print(item)             
-#
-#            #countOfElem = content.count(elem)
-#            #print("char " , elem  , " nr : " , countOfElem)
-#    ##print(content)
-#    chipher1.close()
-
-
-
+    #word = sys.argv[1]
+    #guess_word1(word)
+    print_list()
 
