@@ -43,8 +43,8 @@ def print_list():
     c2chars = []
     i = 0  
     for line in cracked_words:
-       c1chars.append(line[13])
-       c2chars.append(line[20])
+       c1chars.append(line[4])
+       c2chars.append(line[11])
        i = i + 1
     print("Printing line c1")
     for char in c1chars:
@@ -59,7 +59,7 @@ def fetch_c1():
     c1chars = []
     i = 0  
     for line in cracked_words:
-       c1chars.append(line[13])
+       c1chars.append(line[4])
        i = i + 1
     return c1chars
 
@@ -68,7 +68,7 @@ def fetch_c2():
     c2chars = []
     i = 0  
     for line in cracked_words:
-       c2chars.append(line[20])
+       c2chars.append(line[11])
        i = i + 1
     c2chars.pop()
     c2chars.pop()
@@ -134,8 +134,10 @@ if __name__ == "__main__":
     #print(x_or_chipers())
     #word = sys.argv[1]
     #guess_word1(word)
-    #print_list()
-    sha256sum()
+    print_list()
+    #print(fetch_c1())
+    #print(fetch_c2())
+    #sha256sum()
     #cypher_keys = calc_encryption_key()
     #plainText = fetch_c1()
     #lort = encrypt_otp(cypher_keys, plainText)
