@@ -80,17 +80,17 @@ def sha256sum():
     cracked_plainText_c2 = listToString(fetch_c2())
     encryption_key = calc_encryption_key()
     cracked_cypher_1 = encrypt_otp(encryption_key,cracked_plainText_c1)
-
-
-
+    cracked_cypher_2 = encrypt_otp(encryption_key,cracked_plainText_c2)
 
     hashedValue_c1 = hashlib.sha256(cracked_cypher_1.encode("ISO-8859-1")).hexdigest()
-    #hashedValue_c2 = hashlib.sha256(plainText_c2.encode("ISO-8859-1")).hexdigest()
-    #print(hashedValue_c1)
+    hashedValue_c2 = hashlib.sha256(cracked_cypher_2.encode("ISO-8859-1")).hexdigest()
     print(hashedValue_c1)
+    print(hashedValue_c2)
 
     if("fdb8bb2642cb7c9a1869ab99019e3ee3eaff5160c0cf5c8aec1267742e941eb1" == hashedValue_c1):
         print("Challenge1.txt ciphertext matches hash value")
+    if("44e79e85e1aaa37ba74a4a77a7fb15f2da43bca494f1b6ff3ab3eb493b68c24f" == hashedValue_c2):
+        print("Challenge2.txt ciphertext matches hash value")
   
 
 # Calculate the encryption key by brute force
@@ -134,10 +134,10 @@ if __name__ == "__main__":
     #print(x_or_chipers())
     #word = sys.argv[1]
     #guess_word1(word)
-    print_list()
+    #print_list()
     #print(fetch_c1())
     #print(fetch_c2())
-    #sha256sum()
+    sha256sum()
     #cypher_keys = calc_encryption_key()
     #plainText = fetch_c1()
     #lort = encrypt_otp(cypher_keys, plainText)
