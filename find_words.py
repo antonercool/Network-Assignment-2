@@ -1,6 +1,7 @@
 import re
 import sys
 import hashlib
+import operator
 
 # Keys used for the chipers are of size 205
 chipher1 = open("challenge1.txt", "rb") # 203 bytes = 203 keys 
@@ -75,28 +76,50 @@ def fetch_c2():
     return c2chars
 
 def sha256sum():
-    #44e79e85e1aaa37ba74a4a77a7fb15f2da43bca494f1b6ff3ab3eb493b68c24f  
-    #fdb8bb2642cb7c9a1869ab99019e3ee3eaff5160c0cf5c8aec1267742e941eb1
-    #   
-    #d51b39f1ac07f0a65f30c19622d691d5ad99ba8aa7300d925db5afc83f9e77e1
-    #d2a7f30b54ba614132bbbaa22a064051c8460f09acaa5df3869b1ac07a954d4c
+    cracked_plainText_c1 = listToString(fetch_c1())
+    cracked_plainText_c2 = listToString(fetch_c2())
+    encryption_key = calc_encryption_key()
+    cracked_cypher_1 = encrypt_otp(encryption_key,cracked_plainText_c1)
 
-    plainText_c1 = listToString(fetch_c1())
-    plainText_c2 = listToString(fetch_c2())
-    test = "\"Taken in its entirety, the Snowden archive led to an ultimately simple conclusion: the US government had built a system that has as its goal the complete elimination of electronic privacy worldwide."
 
-    hashedValue_c1 = hashlib.sha256(test.encode("ISO-8859-1")).hexdigest()
-    hashedValue_c2 = hashlib.sha256(plainText_c2.encode("ISO-8859-1")).hexdigest()
+
+
+    hashedValue_c1 = hashlib.sha256(cracked_cypher_1.encode("ISO-8859-1")).hexdigest()
+    #hashedValue_c2 = hashlib.sha256(plainText_c2.encode("ISO-8859-1")).hexdigest()
     #print(hashedValue_c1)
-    print(hashedValue_c2)
+    print(hashedValue_c1)
 
     if("fdb8bb2642cb7c9a1869ab99019e3ee3eaff5160c0cf5c8aec1267742e941eb1" == hashedValue_c1):
         print("Challenge1.txt ciphertext matches hash value")
+  
 
-    if("44e79e85e1aaa37ba74a4a77a7fb15f2da43bca494f1b6ff3ab3eb493b68c24f" == hashedValue_c2):
-        print("Challenge1.txt ciphertext matches hash value")
+# Calculate the encryption key by brute force
+# Give the plaintext and the cypher, we cant to find the key
+def calc_encryption_key():
+    chipher1 = open("challenge1.txt", "rb") # 203 bytes = 203 keys 
+    plainText = fetch_c1()
+    keys = []
 
-        
+    chipher1_read = chipher1.read()
+
+    for charCounter in range(len(plainText)):
+        for i in range(255):
+            guessCypher = ord(plainText[charCounter]) ^ i
+            if(guessCypher == chipher1_read[charCounter]):
+                keys.append(i)  
+    return keys
+
+
+def encrypt_otp(keys,plaintext):
+    cypher_text = []
+    item_counter = 0
+    for item in plaintext:           
+        cypher_text.append(chr(ord(item) ^ keys[item_counter]))
+        item_counter =  item_counter + 1
+    cypher_string = ""
+    return cypher_string.join(cypher_text)
+
+
 # Function to convert   
 def listToString(s):  
     # initialize an empty string 
@@ -113,4 +136,9 @@ if __name__ == "__main__":
     #guess_word1(word)
     #print_list()
     sha256sum()
-
+    #cypher_keys = calc_encryption_key()
+    #plainText = fetch_c1()
+    #lort = encrypt_otp(cypher_keys, plainText)
+    #tis = encrypt_otp(cypher_keys, lort)
+    #print(lort)
+    #print(tis)
