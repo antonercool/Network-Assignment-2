@@ -59,16 +59,17 @@ def egcd(a,b):
 
 
 def decrypt_message(encrypted_message, p, q, n):
-    extendedtuple = egcd(p, q)
-    a = extendedtuple[0]
-    b = extendedtuple[1]
-    #r = encrypted_message**((p+1)//4) % p
-    #s = encrypted_message**((q+1)//4) % q
-    r = fast_pow(encrypted_message, (p + 1) // 4, p)
-    s = fast_pow(encrypted_message, (q + 1) // 4, q)
-    r1 = (a * p * r + b * q * s) % n
+    egcd_tuple = egcd(p, q)
+    # Find yp and yq with extended Eucildean algorithm
+    yp = egcd_tuple[0]
+    yq = egcd_tuple[1]
+    #Compute the square root of c modulo p and q
+    mp = fast_pow(encrypted_message, (p + 1) // 4, p)
+    mq = fast_pow(encrypted_message, (q + 1) // 4, q)
+    #Chinese remainder theorem 
+    r1 = (yp * p * mq + yq * q * mp) % n
     r2 = n - r1
-    r3 = (a * p * r + b * q * s) % n
+    r3 = (yp * p * mq + yq * q * mp) % n
     r4 = n - r3
     return r1, r2 , r3, r4
     #print('This is a:', a, "\n" , "This is b:", b, "\n", "This is r:", r, "\n", "This is s:", s)
