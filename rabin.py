@@ -4,11 +4,24 @@
 #https://www.geeksforgeeks.org/rabin-cryptosystem-with-implementation/
 from Cryptodome.Util import number
   
+
+def fast_pow(num, power, mod):
+    #result
+    res = 1 
+    # (b ^ k) * p = num ^ power
+    while power > 0:
+        while power % 2 == 0:
+            power /= 2
+            num = (num * num) % mod
+        power -= 1
+        res = (res * num) % mod
+    return res   
+
 #Generate primes using Cryptodome
 def generate_primes(bitsize):
-    p = number.getPrime(bit)
+    p = number.getPrime(bitsize)
     while True:
-        q = number.getPrime(bit)
+        q = number.getPrime(bitsize)
         if (p != q):
             return (p,q)
 
@@ -45,28 +58,37 @@ def egcd(a,b):
     return (s1, t1)
 
 
-def decrypt_message(encrypted_message, p, q):
+def decrypt_message(encrypted_message, p, q, n):
     extendedtuple = egcd(p, q)
     a = extendedtuple[0]
     b = extendedtuple[1]
-    r = "test"
-    s = "test"
-    r = encrypted_message**((p+1)/4) % p
-    s = encrypted_message**((p+1)/4) % q
+    #r = encrypted_message**((p+1)//4) % p
+    #s = encrypted_message**((q+1)//4) % q
+    r = fast_pow(encrypted_message, (p + 1) // 4, p)
+    s = fast_pow(encrypted_message, (q + 1) // 4, q)
+    r1 = (a * p * r + b * q * s) % n
+    r2 = n - r1
+    r3 = (a * p * r + b * q * s) % n
+    r4 = n - r3
+    return r1, r2 , r3, r4
     #print('This is a:', a, "\n" , "This is b:", b, "\n", "This is r:", r, "\n", "This is s:", s)
 
 if __name__ == '__main__': 
     message = "hello world"
-    bit = 1536
+    bit = 256
     primetuple = generate_primes(bit)
     p = primetuple[0]
     q = primetuple[1]
     n = generate_public_key(p, q)
     encrypted_message = encrypt_message(n, message)
     new_encrypted_message = new_encrypt_message(n, message)
-    print("this is old; ",encrypted_message, "\n", "This is new; ",new_encrypted_message)
-    decrypt_message(encrypted_message, p, q)
-    
+    #print("this is old; ",encrypted_message, "\n", "This is new; ",new_encrypted_message)
+    decrypt_tuple = decrypt_message(encrypted_message, p, q, n)
+    for x in decrypt_tuple:
+        bytestest = x.to_bytes(100, byteorder='little')
+        print(str(bytestest, 'ISO-8859-1'), "\n")
+        
+
 
 """ Decryption
 1. Accept C from sender.
