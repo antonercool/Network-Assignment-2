@@ -77,25 +77,12 @@ def gcd_extended(a, b):
      
     return gcd,x,y 
 
-def egcd(a,b):   
-    s1, s2 = 1, 0   
-    t1, t2 = 0, 1   
-    while b!=0:   
-        q = a//b    
-        r = a%b   
-        a, b = b, r     
-        s = s1 - (q*s2)    
-        s1, s2 = s2, s      
-        t = t1 - (q*t2)    
-        t1, t2 = t2, t    
-    return (s1, t1)    
-      
 
 def decrypt_message(encrypted_message, p, q, n):
     # Find yp and yq with extended Eucildean algorithm
-    egcd_tuple = egcd(p, q)
-    yp = egcd_tuple[0]
-    yq = egcd_tuple[1]
+    egcd_tuple = gcd_extended(p, q)
+    yp = egcd_tuple[1]
+    yq = egcd_tuple[2]
     #Compute the square root of c modulo p and q
     if (yp*p+yq*q) != 1:
         print("ERROR!")
