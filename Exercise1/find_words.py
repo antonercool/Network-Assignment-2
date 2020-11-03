@@ -109,7 +109,7 @@ def calc_encryption_key():
     chipher1_read = chipher1.read()
 
     for charCounter in range(len(plainText)):
-        for i in range(255):
+        for i in range(256):
             guessCypher = ord(plainText[charCounter]) ^ i
             if(guessCypher == chipher1_read[charCounter]):
                 keys.append(i)  
