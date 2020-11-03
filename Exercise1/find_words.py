@@ -48,13 +48,14 @@ def print_list():
        c1chars.append(line[4])
        c2chars.append(line[11])
        i = i + 1
-    print("Printing line c1")
+    print("Printing line cracked line c1")
     for char in c1chars:
         print(char, end = '')
     print("\n")
-    print("printing line c2")
+    print("printing line craked line c2")
     for char in c2chars:
         print(char, end = '')
+    print("")    
 
 
 def fetch_c1():
@@ -89,13 +90,13 @@ def sha256sum():
 
     hashedValue_c1 = hashlib.sha256(cracked_cypher_1.encode("ISO-8859-1")).hexdigest()
     hashedValue_c2 = hashlib.sha256(cracked_cypher_2.encode("ISO-8859-1")).hexdigest()
-    print(hashedValue_c1)
-    print(hashedValue_c2)
+    print("\t hash c1 : ",  hashedValue_c1)
+    print("\t hash c2 : " , hashedValue_c2)
 
     if("fdb8bb2642cb7c9a1869ab99019e3ee3eaff5160c0cf5c8aec1267742e941eb1" == hashedValue_c1):
-        print("Challenge1.txt ciphertext matches hash value")
+        print("\t Challenge1.txt ciphertext matches hash value")
     if("44e79e85e1aaa37ba74a4a77a7fb15f2da43bca494f1b6ff3ab3eb493b68c24f" == hashedValue_c2):
-        print("Challenge2.txt ciphertext matches hash value")
+        print("\t Challenge2.txt ciphertext matches hash value")
   
 
 # Calculate the encryption key by brute force
@@ -137,12 +138,13 @@ def listToString(s):
 
 
 if __name__ == "__main__":
-    #print(x_or_chipers())
-    #word = sys.argv[1]
-    #guess_word1(word)
-    #print_list()
-    #print(fetch_c1())
-    #print(fetch_c2())
+    word = sys.argv[1]
+    guess_word1(word)
+    
+    print("")
+    print("Cracked encryption keys verification :")
     sha256sum()
-    #cypher_keys = calc_encryption_key()
-    #plainText = fetch_c1()
+
+    print("Printing registored word list:")
+    print_list()
+
