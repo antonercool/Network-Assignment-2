@@ -3,16 +3,16 @@
 # Large Prime Generation for RSA 
 #https://www.geeksforgeeks.org/rabin-cryptosystem-with-implementation/
 from Cryptodome.Util import number
-from Crypto import Random
-import Crypto
+from Cryptodome import Random
+import Cryptodome
 import codecs
 import sys
   
 #Generate primes using Cryptodome
 def generate_primes(bitsize):
     while True:
-        p = number.getPrime(bitsize, randfunc=Crypto.Random.get_random_bytes)
-        q = number.getPrime(bitsize, randfunc=Crypto.Random.get_random_bytes)
+        p = number.getPrime(bitsize, randfunc=Cryptodome.Random.get_random_bytes)
+        q = number.getPrime(bitsize, randfunc=Cryptodome.Random.get_random_bytes)
         ## Make sure the big primes are not equal + ensure 
         if (p != q) and ((p % 4) ==3) and ((q % 4)==3):
             return (p,q)
