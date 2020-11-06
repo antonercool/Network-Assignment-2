@@ -97,7 +97,7 @@ def decrypt_message(encrypted_message, p, q, n):
   
 if __name__ == '__main__': 
     message = sys.argv[1]
-    bit_size = 256
+    bit_size = 1536
     primetuple = generate_primes(bit_size)
     
     p = primetuple[0]
